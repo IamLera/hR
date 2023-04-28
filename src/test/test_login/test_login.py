@@ -9,6 +9,8 @@ class TestLoginPage:
         loginPage = LoginPage(safari_driver, link)
         loginPage.open()
         loginPage.logIn("admin@halterranch.com", "click_here_to_obtain_good_adm1n_password_EXE")
+        loginPage.assertErrorMsgNotPresent()
+
 
     def testInvalidLogin(self, safari_driver):
 

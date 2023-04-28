@@ -1,3 +1,5 @@
+import time
+
 from .base_page import BasePage
 from .locators import LoginPageLocators as LPL
 class LoginPage(BasePage):
@@ -7,7 +9,13 @@ class LoginPage(BasePage):
     def logIn(self, email, password):
         self.browser.find_element(*LPL.emailField).send_keys(email)  # enters a random email
         self.browser.find_element(*LPL.passwordField).send_keys(password)  # enters a random password
+        time.sleep(1)
         self.browser.find_element(*LPL.loginBtn).click()  # clicks the "Register" button
+
+    def assertErrorMsgNotPresent(self):
+        errorMsg = self.browser.find_elements(*LPL.errorMsg)
+        # Assert that the element is present
+        assert len(errorMsg)==0, "Error - "+errorMsg[0].text
 
     def assertErrorMsgPresent(self):
         errorMsg = self.browser.find_element(*LPL.errorMsg)
