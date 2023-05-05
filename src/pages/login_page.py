@@ -8,8 +8,8 @@ class LoginPage(BasePage):
 
     def logIn(self, email, password):
         self.browser.find_element(*LPL.emailField).send_keys(email)  # enters a random email
+        time.sleep(1)  # Wait for 1 second before entering the password
         self.browser.find_element(*LPL.passwordField).send_keys(password)  # enters a random password
-        time.sleep(1)
         self.browser.find_element(*LPL.loginBtn).click()  # clicks the "Register" button
 
     def assertErrorMsgNotPresent(self):
