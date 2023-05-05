@@ -6,3 +6,7 @@ class LoginPageLocators():
     passwordField = (By.CSS_SELECTOR, ".mantine-PasswordInput-input input")
     loginBtn = (By.CSS_SELECTOR, "button[aria-label='log in']")
     errorMsg = (By.CSS_SELECTOR, ".mantine-Alert-message")
+
+class ListSkuLocators:
+    gridName = (By.XPATH, "//div[contains(@class, 'mantine-Grid-root')]/div/div[contains(text(),'SKUs')]")
+    grid = (By.CSS_SELECTOR, ".mantine-Table-root")

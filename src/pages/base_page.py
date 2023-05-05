@@ -1,5 +1,8 @@
+import time
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoAlertPresentException
@@ -53,4 +56,10 @@ class BasePage:
 
     def open(self):
         self.browser.get(self.url)
+
+    def openNavOption(self, option, suboption):
+       # self.browser.find_element(By.CSS_SELECTOR, f'nav div span:contains("{option}")').findfirst().click()
+        self.browser.find_elements(By.XPATH, f"//button/span/span[contains(text(), '{option}')]")[0].click()
+        time.sleep(1)
+        self.browser.find_elements(By.XPATH, f"//div[contains(@class,'mantine-NavLink-children')]/a/span/span[contains(text(), '{suboption}')]")[0].click()
 
