@@ -1,7 +1,7 @@
 import requests
 import pytest
 import json
-from src.api.helpers.data.login_body import loginBody as lB
+from src.api.services.data.login_body import loginBody as lB
 from src.api.storage.stored_data import StoreData as sD
 
 
@@ -16,12 +16,14 @@ class LoginReq:
         newlB = lB(self.email, self.password)
 
         jsonLB = json.loads(newlB.to_json())
-        print(f'\nRequest:\n{json.dumps(jsonLB, indent=4)}')
 
-        # send the request & get response
+        print(f'\n*** *** *** Send Login request *** *** ***\n')
+        print(f'Request url - {url}')
+        print(f'\nRequest body:\n{json.dumps(jsonLB, indent=4)}')
         resp = requests.post(url, data=newlB.to_json())
 
-        print(f'\nResponse:\n{json.dumps(resp.json(), indent=4)}')
+        print(f'\n*** *** *** Get Login response *** *** ***\n')
+        print(f'\nResponse body:\n{json.dumps(resp.json(), indent=4)}')
 
         # store the data
         if resp.status_code == 200:

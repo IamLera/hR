@@ -1,4 +1,4 @@
-from src.api.helpers.requests.login_reg import LoginReq
+from src.api.services.requests.login_reg import LoginReq
 
 class TestLoginPage:
     def testValidLogin(self):
