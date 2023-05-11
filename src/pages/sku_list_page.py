@@ -12,3 +12,6 @@ class ListSkusPage(BasePage):
         grid = self.browser.find_element(*LSL.grid)
         # Assert that the element is present
         assert gridName is not None, "Element not found"
+
+    def createSku(self):
+        self.browser.find_element(*LSL.newSkuBtn).click()
