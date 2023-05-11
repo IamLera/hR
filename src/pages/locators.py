@@ -10,3 +10,4 @@ class LoginPageLocators():
 class ListSkuLocators:
     gridName = (By.XPATH, "//div[contains(@class, 'mantine-Grid-root')]/div/div[contains(text(),'SKUs')]")
     grid = (By.CSS_SELECTOR, ".mantine-Table-root")
+    newSkuBtn = (By.XPATH, "//div[contains(text(),'+ New SKU')]")
