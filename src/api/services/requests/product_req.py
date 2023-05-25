@@ -1,4 +1,6 @@
 import json
+from math import ceil
+
 from src.api.storage.stored_data import StoreData as sD
 from src.api.services.data.product_body import productBody
 from src.api.services.data.category_body import categoryBody
@@ -9,8 +11,8 @@ import jsonpickle
 
 class ProductReq:
 
-    def getProductList(self):
-        url = "https://api.dev.halterranch.com/v1/product"
+    def getProductList(self, page=1):
+        url = f"https://api.dev.halterranch.com/v1/product?page={page}"
         headers = {"Authorization": f'Bearer {sD.store["access_token"]}'}
 
         print(f'\n*** *** *** Send getProductList request *** *** ***\n')
@@ -101,3 +103,38 @@ class ProductReq:
                 f'Wrong status code - {resp.status_code}'
                 f'\nResponse:\n{json.dumps(resp.json(), indent=4)}'
             )
+
+    def deleteProduct(self, productId):
+        url = f"https://api.dev.halterranch.com/v1/product/{productId}"
+        headers = {"Authorization": f'Bearer {sD.store["access_token"]}'}
+
+        print(f'\n*** *** *** Send deleteProduct request *** *** ***\n')
+        print(f'Request header - {headers}')
+        print(f'Request url - {url}')
+
+        resp = requests.delete(url, headers=headers)
+        print(f'\n*** *** *** Get deleteProduct response *** *** ***\n')
+
+        assert resp.status_code == 204, f'Wrong status code - {resp.status_code}' \
+                                        f'\nResponse:\n{json.dumps(resp.json(), indent=4)}'
+
+    def deleteCreatedProducts(self, startstr):
+        listOfProducts = []
+        deletedItems = []
+        page = 1
+
+        while True:
+            self.getProductList(page)
+            listOfProducts.extend(sD.store['productListResp']['items'])
+            numOfPages = ceil(sD.store['productListResp']['total'] / sD.store['productListResp']['page_size'])
+            if page >= numOfPages:
+                break
+            page += 1
+
+        for product in listOfProducts:
+            if str(product['product_name']).startswith(startstr):
+                self.deleteProduct(product['id'])
+                deletedItems.append(product['product_name'])
+
+        print(f'\nDeleted items:\n')
+        print([f'{item}' for item in deletedItems])
