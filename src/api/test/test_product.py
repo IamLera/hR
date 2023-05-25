@@ -3,6 +3,7 @@ from src.api.services.data.product_body import productBody
 from src.api.services.requests.category_req import CategoryReq
 from src.api.services.requests.product_req import ProductReq
 from src.helpers.value_generators import Generators
+from src.api.storage.stored_data import StoreData as sD
 
 
 class TestProducts:
@@ -150,11 +151,18 @@ class TestProducts:
         name = Generators.stringGenerator()
         invType = "gratuity"
         body = productBody(name, invType)
-
-        invType = "gratuity"
-
         bodyUpdated = productBody(name, invType, price="150$")
 
         pR = ProductReq()
         pR.createProduct(body)
         pR.editProduct(bodyUpdated)
+
+    def testDeleteProduct(self, api_login):
+        name = Generators.stringGenerator()
+        invType = "gratuity"
+        body = productBody(name, invType)
+
+        pR = ProductReq()
+        pR.createProduct(body)
+        pR.deleteProduct(sD.store['createProductResp']['id'])
+
