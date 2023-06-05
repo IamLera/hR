@@ -31,6 +31,8 @@ class CategoryReq:
         subcat_dict={}
         data = sD.store["getCategoryListResp"]
 
+        # add categories to the dictionary - dict={"cat":["cat_id", "subcatDict":
+        #                                                                           [{"subcatName1"},{"subcatId1}...]]}
         for item in data.get('items', []):
             item_id = item.get('id')
             item_name = item.get('name')
