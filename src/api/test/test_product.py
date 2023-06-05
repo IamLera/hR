@@ -20,10 +20,15 @@ class TestProducts:
         cat.getCategoryList()
         catDict = cat.returnCategoryDict()
 
-        body = productBody(name, invType, category_id=catDict['Experiences'])
+        body = productBody(name, invType, category_id=catDict['Experiences'][0])
 
         pR = ProductReq()
         pR.createProduct(body)
+
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateExperiencesProduct(self, api_login):
         name = Generators.stringGenerator()
@@ -37,6 +42,11 @@ class TestProducts:
 
         pR = ProductReq()
         pR.createProduct(body)
+
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateCulinaryProduct(self, api_login):
         name = Generators.stringGenerator()
@@ -53,6 +63,11 @@ class TestProducts:
         pR = ProductReq()
         pR.createProduct(body)
 
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
+
     def testCreateTastingProduct(self, api_login):
         name = Generators.stringGenerator()
         invType = "tasting"
@@ -68,6 +83,11 @@ class TestProducts:
         pR = ProductReq()
         pR.createProduct(body)
 
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
+
     def testCreateShippingProduct(self, api_login):
         name = Generators.stringGenerator()
         invType = "shipping"
@@ -81,6 +101,11 @@ class TestProducts:
 
         pR = ProductReq()
         pR.createProduct(body)
+
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateNonInventoryProduct(self, api_login):
         name = Generators.stringGenerator()
@@ -96,6 +121,11 @@ class TestProducts:
         pR = ProductReq()
         pR.createProduct(body)
 
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
+
     def testCreateMerchandiseProduct(self, api_login):
         name = Generators.stringGenerator()
         invType = "merchandise"
@@ -110,6 +140,11 @@ class TestProducts:
         pR = ProductReq()
         pR.createProduct(body)
 
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
+
     def testCreateGratuityProduct(self, api_login):
         name = Generators.stringGenerator()
         invType = "gratuity"
@@ -123,6 +158,11 @@ class TestProducts:
 
         pR = ProductReq()
         pR.createProduct(body)
+
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateRetailFoodProduct(self, api_login):
         name = Generators.stringGenerator()
@@ -139,6 +179,11 @@ class TestProducts:
         pR = ProductReq()
         pR.createProduct(body)
 
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
+
     def testCreateProduct(self, api_login):
         name = Generators.stringGenerator()
         invType = "gratuity"
@@ -147,15 +192,27 @@ class TestProducts:
         pR = ProductReq()
         pR.createProduct(body)
 
+        assert name == sD.store['createProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["product_name"]}'
+        assert invType == sD.store['createProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
+
     def testEditProduct(self, api_login):
         name = Generators.stringGenerator()
+        nameUpd = Generators.stringGenerator()
         invType = "gratuity"
         body = productBody(name, invType)
-        bodyUpdated = productBody(name, invType, price="150$")
+        bodyUpdated = productBody(nameUpd, invType, price="150$")
 
         pR = ProductReq()
         pR.createProduct(body)
         pR.editProduct(bodyUpdated)
+
+        assert nameUpd == sD.store['editProductResp']['product_name'],\
+            f'Wrong product_name - {sD.store["editProductResp"]["product_name"]}'
+        assert invType == sD.store['editProductResp']['inventory_type'],\
+            f'Wrong product_name - {sD.store["editProductResp"]["inventory_type"]}'
+
 
     def testDeleteProduct(self, api_login):
         name = Generators.stringGenerator()
@@ -165,4 +222,3 @@ class TestProducts:
         pR = ProductReq()
         pR.createProduct(body)
         pR.deleteProduct(sD.store['createProductResp']['id'])
-

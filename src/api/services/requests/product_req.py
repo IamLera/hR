@@ -123,6 +123,7 @@ class ProductReq:
         deletedItems = []
         page = 1
 
+        # go through all the pages and add all the items to the listOfProducts list
         while True:
             self.getProductList(page)
             listOfProducts.extend(sD.store['productListResp']['items'])
@@ -131,6 +132,7 @@ class ProductReq:
                 break
             page += 1
 
+        # remove those that start with the startstr
         for product in listOfProducts:
             if str(product['product_name']).startswith(startstr):
                 self.deleteProduct(product['id'])
