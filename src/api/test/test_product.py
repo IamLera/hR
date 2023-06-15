@@ -1,4 +1,3 @@
-from src.api.services.data.category_body import categoryBody
 from src.api.services.data.product_body import productBody
 from src.api.services.requests.category_req import CategoryReq
 from src.api.services.requests.product_req import ProductReq
