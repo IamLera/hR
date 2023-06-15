@@ -2,9 +2,6 @@ import json
 from math import ceil
 
 from src.api.storage.stored_data import StoreData as sD
-from src.api.services.data.product_body import productBody
-from src.api.services.data.category_body import categoryBody
-from faker import Faker
 import requests
 import jsonpickle
 
