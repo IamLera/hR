@@ -27,9 +27,9 @@ class customerProfileBody():
 
 class customerAddressBody():
 
-    def __init__(self, address_name="", first_name="", last_name="", country="USA", state="", city="", business="",
+    def __init__(self, address_name="", first_name="", last_name="",  state="", city="", business="",
                  street_address_one="", street_address_two="", zip_code=None, is_same_as_shipping_address=False,
-                 is_default=False):
+                 is_default=False, country="USA"):
         self.address_name = address_name
         self.first_name = first_name
         self.last_name = last_name
@@ -45,8 +45,9 @@ class customerAddressBody():
 
 class customerWalletBody():
 
-    def __init__(self, card_name, card_number, expiration_date, cvv, name_on_card, first_name, last_name, country, state,
-                 city, business, street_address_one, street_address_two, zip_code, is_same_as_shipping_address, is_default, address_name):
+    def __init__(self, card_name, card_number, expiration_date, cvv, name_on_card, first_name, last_name,  state,
+                 city, business, street_address_one, street_address_two, zip_code,  address_name,
+                 is_same_as_shipping_address=True, is_default=False, country="USA"):
         self.card_name = card_name
         self.card_number = card_number
         self.expiration_date = expiration_date
