@@ -12,7 +12,7 @@ class TestProducts:
         pR.getProductList()
 
     def testCreateDiscountProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "discounts"
 
         cat = CategoryReq()
@@ -30,7 +30,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateExperiencesProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "experiences"
 
         cat = CategoryReq()
@@ -48,7 +48,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateCulinaryProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "culinary"
         category = 'Culinary'
         subCat = 'Starters'
@@ -68,7 +68,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateTastingProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "tasting"
         category = 'Tasting Room'
         subCat = 'Ranch Flight'
@@ -88,7 +88,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateShippingProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "shipping"
         category = 'Experiences'
 
@@ -107,7 +107,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateNonInventoryProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "non_inventory_items"
         category = 'Experiences'
 
@@ -126,7 +126,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateMerchandiseProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "merchandise"
         category = 'Estate Goods'
 
@@ -145,7 +145,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateGratuityProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "gratuity"
         category = 'Estate Goods'
 
@@ -164,7 +164,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateRetailFoodProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "retail_food"
         category = 'Tasting Room'
         subCat = 'Ranch Flight'
@@ -184,7 +184,7 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testCreateProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "gratuity"
         body = productBody(name, invType)
 
@@ -197,8 +197,8 @@ class TestProducts:
             f'Wrong product_name - {sD.store["createProductResp"]["inventory_type"]}'
 
     def testEditProduct(self, api_login):
-        name = Generators.stringGenerator()
-        nameUpd = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
+        nameUpd = Generators.stringGeneratorMarked()
         invType = "gratuity"
         body = productBody(name, invType)
         bodyUpdated = productBody(nameUpd, invType, price="150$")
@@ -214,7 +214,7 @@ class TestProducts:
 
 
     def testDeleteProduct(self, api_login):
-        name = Generators.stringGenerator()
+        name = Generators.stringGeneratorMarked()
         invType = "gratuity"
         body = productBody(name, invType)
 
