@@ -2,6 +2,7 @@ from src.api.services.data.customer_body import customerBody as cusB, customerAd
     as cusP, customerWalletBody as cusW, customerNoClubMembershipBody as cusNoC, customerClubMembershipBody as cusC
 from src.api.services.data.tier_body import tierBody as tierB
 from src.api.services.requests.cutomer_req import CustomerReq
+from src.helpers.asserts import Asserts
 from src.helpers.value_generators import Generators
 from src.api.storage.stored_data import StoreData as sD
 
@@ -416,15 +417,13 @@ class TestCustomers:
         cR.addCustomerWallet(newWallet, cusId)
 
         walletsResp = sD.store["addCustomerWalletResp"]
-
-        assert fName == walletsResp["first_name"], f'Wrong first_name - {walletsResp["first_name"]}'
-        assert lName == walletsResp["last_name"], f'Wrong last_name - {walletsResp["last_name"]}'
-        assert city == walletsResp["city"], f'Wrong city - {walletsResp["city"]}'
-        assert zipCode == walletsResp["zip_code"], f'Wrong zip_code - {walletsResp["zip_code"]}'
-        assert address1 == walletsResp["street_address_one"], f'Wrong street_address_one - {walletsResp["street_address_one"]}'
-        assert address2 == walletsResp["street_address_two"], f'Wrong street_address_two - {walletsResp["street_address_two"]}'
-        assert cName == walletsResp["card_name"], f'Wrong is_same_as_shipping_address - {walletsResp["card_name"]}'
-        assert nameOnCard == walletsResp["name_on_card"], f'Wrong is_same_as_shipping_address - {walletsResp["name_on_card"]}'
+        Asserts.assertEqual(walletsResp["first_name"], fName, "first_name")
+        Asserts.assertEqual(walletsResp["last_name"], lName, "last_name")
+        Asserts.assertEqual(walletsResp["city"], city, "city")
+        Asserts.assertEqual(walletsResp["zip_code"], zipCode, "zip_code")
+        Asserts.assertEqual(walletsResp["street_address_one"], address1, "street_address_one")
+        Asserts.assertEqual(walletsResp["street_address_two"], address2, "street_address_two")
+        Asserts.assertEqual(walletsResp["name_on_card"], nameOnCard, "name_on_card")
 
     def testEditCustomerClub(self, api_login):
         # profile data
@@ -467,8 +466,8 @@ class TestCustomers:
         cR.editCustomerClub(newMembership, cusId, clubId)
 
         clubResp = sD.store["editCustomerClubResp"]
-        assert newtType == clubResp["tier"]["wine_type"], f'Wrong wine_type - {clubResp["tier"]["wine_type"]}'
-        assert newQnt == clubResp["tier"]["bottle_quantity"], f'Wrong bottle_quantity - {clubResp["tier"]["bottle_quantity"]}'
-        assert newPickup["location_id"] == clubResp["pickup"]["location"]["id"], f'Wrong location id - {clubResp["pickup"]["location"]["id"]}'
+        Asserts.assertEqual(clubResp["tier"]["wine_type"], newtType, "wine_type")
+        Asserts.assertEqual(clubResp["tier"]["bottle_quantity"], newQnt, "bottle_quantity")
+        Asserts.assertEqual(clubResp["pickup"]["location"]["id"], newPickup["location_id"], "location id")
 
 
